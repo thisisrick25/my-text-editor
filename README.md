@@ -1,2 +1,2 @@
-# my-txet-rotide
+# my-text-editor
 A simple smol text editor
