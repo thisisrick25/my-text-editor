@@ -20,6 +20,7 @@ void enableRawMode()
     raw.c_iflag &= ~(IXON | ICRNL | BRKINT | INPCK | ISTRIP);
     raw.c_oflag &= ~(OPOST);
     raw.c_lflag &= ~(ECHO | ICANON | ISIG | IEXTEN);
+    raw.c_cflag |= (CS8);
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
 }
 
