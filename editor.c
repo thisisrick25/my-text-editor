@@ -42,7 +42,6 @@ int main()
 {
     enableRawMode();
 
-    char c;
     while (1)
     {
         char c = '\0';
