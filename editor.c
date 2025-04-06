@@ -22,6 +22,8 @@ void enableRawMode()
     raw.c_lflag &= ~(ECHO | ICANON | ISIG | IEXTEN);
     raw.c_cflag |= (CS8);
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &raw);
+    raw.c_cc[VMIN] = 0;
+    raw.c_cc[VTIME] = 1;
 }
 
 int main()
@@ -29,8 +31,11 @@ int main()
     enableRawMode();
 
     char c;
-    while (read(STDIN_FILENO, &c, 1) == 1 && c != 'q')
+    while (1)
     {
+        char c = '\0';
+        read(STDIN_FILENO, &c, 1);
+
         if (iscntrl(c))
         {
             printf("%d\r\n", c);
@@ -39,6 +44,7 @@ int main()
         {
             printf("%d ('%c')\r\n", c, c);
         }
+        if (c == 'q') break;
     }
     return 0;
 }
