@@ -6,6 +6,12 @@
 
 struct termios orig_termios;
 
+void die(const char *s)
+{
+    perror(s);
+    exit(1);
+}
+
 void disableRawMode()
 {
     tcsetattr(STDIN_FILENO, TCSAFLUSH, &orig_termios);
@@ -44,7 +50,8 @@ int main()
         {
             printf("%d ('%c')\r\n", c, c);
         }
-        if (c == 'q') break;
+        if (c == 'q')
+            break;
     }
     return 0;
 }
